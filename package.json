@@ -1,0 +1,25 @@
+{
+  "name": "tuyaha-mqtt",
+  "version": "0.1.0",
+  "description": "Interacts with Tuya Cloud (Open API) and publishes changes + allows control over MQTT",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denwilliams/tuyaha-mqtt.git"
+  },
+  "author": "Den Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denwilliams/tuyaha-mqtt/issues"
+  },
+  "homepage": "https://github.com/denwilliams/tuyaha-mqtt#readme",
+  "dependencies": {
+    "deep-equal": "^2.0.3",
+    "got": "^11.1.4",
+    "mqtt-usvc": "^3.0.5",
+    "prom-client": "^12.0.0"
+  }
+}
