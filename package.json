@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Interacts with Tuya Cloud (Open API) and publishes changes + allows control over MQTT",
   "main": "main.js",
+  "bin": {
+    "tuyaha-mqtt": "./main.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
