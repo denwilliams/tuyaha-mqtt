@@ -7,7 +7,7 @@ class Client {
     region = "us",
     countryCode = "1",
     bizType = "smart_life",
-    credentials = null
+    credentials = null,
   }) {
     this.username = username;
     this.password = password;
@@ -28,11 +28,14 @@ class Client {
           password: this.password,
           countryCode: this.countryCode,
           bizType: this.bizType,
-          from: this.from
-        }
+          from: this.from,
+        },
       })
       .json();
 
+    if (body.responseStatus && body.responseStatus === "error") {
+      throw new Error(body.errorMsg);
+    }
     console.log(body);
 
     return body;
@@ -42,7 +45,7 @@ class Client {
     const response = await this.skill({
       name: "Discovery",
       namespace: "discovery",
-      payloadVersion: 1
+      payloadVersion: 1,
     });
     return response.payload.devices;
   }
@@ -50,11 +53,11 @@ class Client {
   async setState(devId, { command = "turnOnOff", value = 0 }) {
     const header = {
       name: command,
-      namespace: "control"
+      namespace: "control",
     };
     const payload = {
       devId,
-      value
+      value,
     };
 
     return this.skill(header, payload);
@@ -67,14 +70,14 @@ class Client {
 
     const header = {
       ..._header,
-      payloadVersion: 1
+      payloadVersion: 1,
     };
     const payload = { ..._payload, accessToken: this.credentials.access_token };
     const data = { header: header, payload: payload };
 
     const response = await got
       .post(this.baseUrl + "/homeassistant/skill", {
-        json: data
+        json: data,
       })
       .json();
 
@@ -85,21 +88,3 @@ class Client {
 }
 
 exports.Client = Client;
-
-// async function main() {
-//   const devices = await getDevices();
-//   console.log(devices);
-
-//   await setState("turnOnOff", "030852562cf43239ebec", 0);
-// }
-
-// {
-//     access_token: 'EUheu1578519338682rWUFcsHDcin1Ufq',
-//     refresh_token: 'EUheu1578519338682rWUFckhpLKJ8uPX',
-//     token_type: 'bearer',
-//     expires_in: 864000
-//   }
-
-// let accessToken = "EUheu1578519338682rWUFcsHDcin1Ufq";
-
-// main().catch(console.error);

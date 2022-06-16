@@ -15,7 +15,7 @@ async function main() {
 
   async function poll() {
     const devices = await client.getDevices();
-    devices.forEach((device) => {
+    devices?.forEach((device) => {
       if (state[device.id] && deepEqual(state[device.id].data, device.data)) {
         return;
       }

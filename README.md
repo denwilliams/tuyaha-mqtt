@@ -8,6 +8,8 @@ Unfortunately there aren't any nice alternatives at the moment, they all require
 
 > NOTE: this is still works-in-progress. May be unstable and not fully tested.
 
+> NOTE2: the Tuya API this uses is deprecated and it looks like already some things are starting to not work. Will need to move to their new API.
+
 ## Configuration
 
 This uses [mqtt-usvc](https://github.com/denwilliams/mqtt-usvc) which can be configured using a YAML file, environment variables, or using Consul KV.
