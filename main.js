@@ -2,7 +2,7 @@
 "use strict";
 
 const mqttusvc = require("mqtt-usvc");
-var deepEqual = require("deep-equal");
+const deepEqual = require("deep-equal");
 
 const { Client } = require("./client");
 
@@ -15,7 +15,7 @@ async function main() {
 
   async function poll() {
     const devices = await client.getDevices();
-    devices.forEach(device => {
+    devices.forEach((device) => {
       if (state[device.id] && deepEqual(state[device.id].data, device.data)) {
         return;
       }
@@ -23,7 +23,7 @@ async function main() {
       service.send(`~/status/${device.id}`, {
         name: device.name,
         type: device.ha_type,
-        ...device.data
+        ...device.data,
       });
     });
   }
@@ -58,7 +58,7 @@ async function main() {
   poll();
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
