@@ -1,6 +1,6 @@
 {
   "name": "tuyaha-mqtt",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Interacts with Tuya Cloud using the Home Assistant API, publishes state changes over MQTT and allows control of device state by sending MQTT messages.",
   "main": "main.js",
   "bin": {
