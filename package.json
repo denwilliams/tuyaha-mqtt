@@ -21,7 +21,7 @@
   "homepage": "https://github.com/denwilliams/tuyaha-mqtt#readme",
   "dependencies": {
     "deep-equal": "^2.0.5",
-    "got": "^11.8.5",
+    "got": "^12.5.3",
     "mqtt-usvc": "^3.1.0",
     "prom-client": "^14.0.1"
   }
