@@ -1,0 +1,19 @@
+name: publish release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 20
+      - run: npm i
+      - run: ./sea.sh
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: .sea/tuyaha-mqtt-*
