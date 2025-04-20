@@ -1,0 +1,1 @@
+Taken from https://github.com/tuya/tuya-homebridge/blob/175af8a12befcb120e5d6fb55d9842642211c334/lib/tuyashopenapi.js

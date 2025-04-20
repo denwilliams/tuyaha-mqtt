@@ -106,3 +106,7 @@ dist
 config.yml
 
 .sea/
+
+.vscode/
+
+config.yml

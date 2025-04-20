@@ -1,14 +1,14 @@
 # tuyaha-mqtt
 
-Interacts with Tuya Cloud using the Home Assistant API, publishes state changes over MQTT and allows control of device state by sending MQTT messages.
+> NOTE: UNSTABLE TRIAL VERSION - USING API AS PER HOMEBRIDGE PLUGIN
 
-The Home Assistant API is undocumented, limited functionality, and doesn't support all devices. Seems likely this API might disappear at some stage.
+BREAKING MQTT API CHANGE FROM PREVIOUS VERSION.
 
-Unfortunately there aren't any nice alternatives at the moment, they all require hacks to get running.
+Somewhat replicates the homebridge plugin [tuya-homebridge](https://github.com/tuya/tuya-homebridge), but strips out all the accessory stuff and replaces it with a simple MQTT interface.
 
-> NOTE: this is still works-in-progress. May be unstable and not fully tested.
+Very early version. Quite untested.
 
-> NOTE2: the Tuya API this uses is deprecated and it looks like already some things are starting to not work. Will need to move to their new API.
+Also wanted to look into using https://github.com/tuya/tuya-connector-nodejs but limited documentation.
 
 ## Configuration
 
@@ -27,56 +27,23 @@ service:
   countryCode: "1" # Your account country code, e.g., 1 for USA or 86 for China
   bizType: "smart_life" # tuya, smart_life, etc
   username: "youremail@example.com" # Could also be a phone number
-  password: "yourpassword"
-  # If you supply credentials it will use these, else it will log in
-  credentials:
-    access_token: longaccesstokenfrompastlogin
+  password: "yourpassword" # suggest creating a service account for this and not using your main account
 ```
+
+## Notes
+
+I have to disable IPv6 to use this (or the homebridge plugin). Likely has more to do with my ISP that anything else.
 
 ## Events Published (Output)
 
-Assuming using a prefix of `tuya` any state change for a detected device is emitted on `tuya/status/{device_id}`.
+Assuming using a prefix of `tuya` any device discovered is emitted on `tuya/status/{device_id}`.
 
-If the service is started all devices will have their status re-emitted.
+Any status change is emitted on `tuya/status/{device_id}/{status_code}`.
 
-Examples:
+If the service is started all devices will have their current statuses re-emitted.
 
-```
+## Command Events (Input)
 
-```
+Assuming using a prefix of `tuya` you can change state via commands sent to `tuya/set/{device_id}/{command_code}`. with a value of the desired new state.
 
-## Control Events (Input)
-
-Assuming using a prefix of `tuya` you can change state via commands sent to `tuya/set/{device_id}`.
-
-You can send either a single command (object) or multiple (array). You can see the known commands in the [Python library used for Home Assistant](https://github.com/PaulAnnekov/tuyaha/tree/master/tuyaha/devices). Examples are turnOnOff brightnessSet colorSet startStop windSpeedSet modeSet temperatureSet.
-
-### Examples:
-
-Turn something on:
-
-```json
-{ "command": "turnOnOff", "value": 1 }
-```
-
-Turn something off:
-
-```json
-{ "command": "turnOnOff", "value": 0 }
-```
-
-Set brightness of a light. Comments seem to indicate this is 0-255, but the ones I own seem to work between 0-100.
-This doesn't seem to match the returned brightness from my lights. I get a value 0-1000, and not even linear
-
-```json
-{ "command": "brightnessSet", "value": 50 }
-```
-
-Turn on and set brightness to 50:
-
-```json
-[
-  { "command": "turnOnOff", "value": 1 },
-  { "command": "brightnessSet", "value": 50 }
-]
-```
+TBD: allow sending multiple commands in a single message.

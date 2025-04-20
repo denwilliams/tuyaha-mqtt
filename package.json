@@ -1,10 +1,10 @@
 {
   "name": "tuyaha-mqtt",
-  "version": "0.3.1",
-  "description": "Interacts with Tuya Cloud using the Home Assistant API, publishes state changes over MQTT and allows control of device state by sending MQTT messages.",
-  "main": "main.js",
+  "version": "0.4.0-alpha.1",
+  "description": "Interacts with Tuya Cloud for your devices, publishes state changes over MQTT and allows control of device state by sending MQTT messages.",
+  "main": "./dist/main.js",
   "bin": {
-    "tuyaha-mqtt": "./main.js"
+    "tuyaha-mqtt": "./dist/main.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,13 +20,18 @@
   },
   "homepage": "https://github.com/denwilliams/tuyaha-mqtt#readme",
   "dependencies": {
-    "deep-equal": "^2.0.5",
-    "got": "^11.8.5",
+    "axios": "^1.8.4",
+    "crypto-js": "^4.2.0",
+    "mqtt": "^5.11.0",
     "mqtt-usvc": "^3.1.0",
-    "prom-client": "^14.0.1"
+    "prom-client": "^14.2.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "esbuild": "^0.18.15",
-    "postject": "^1.0.0-alpha.6"
+    "@types/crypto-js": "^4.2.2",
+    "@types/uuid": "^9.0.8",
+    "esbuild": "^0.25.2",
+    "postject": "^1.0.0-alpha.6",
+    "typescript": "^5.8.3"
   }
 }
